@@ -3,11 +3,12 @@
 import socket
 import threading
 
-class server:
+class Server:
     def __init__(self, host, port):
         self.host = host
         self.port = port
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.data = ""
         self.startServer()
 
     def startServer(self):
@@ -21,12 +22,13 @@ class server:
 
     def newNode(self):
         while True:
-            data = self.server.recv(1024).decode()
+            self.data = self.server.recv(1024).decode()
 
             if not data:
                 break
-
-            print(data)
+    
+    def getData(self):
+        return self.data
 
 host = "0.0.0.0"
 port = 5000
